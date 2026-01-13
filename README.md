@@ -2,8 +2,6 @@
 
 Futbol kulüpleri ile profesyonel veri analistlerini bir araya getiren; kulüplerin analiz talebi oluşturabildiği, analistlerin ise iş fırsatlarını inceleyip başvurabildiği kapsamlı bir kariyer ve hizmet platformudur.
 
-Proje, **Mobil Öncelikli (Mobile First)** yaklaşımıyla tasarlanmış olup, mobil tarayıcılarda **Native Uygulama (PWA)** deneyimi sunmaktadır.
-
 ---
 
 ## 🛠 Kullanılan Teknolojiler
@@ -14,20 +12,12 @@ Projede platform bağımsız (Cross-Platform) web teknolojileri tercih edilmişt
 * **Framework:** ASP.NET Core 7.0 MVC
 * **Veritabanı:** Microsoft SQL Server (Entity Framework Core - Code First)
 * **Ön Yüz (Frontend):** HTML5, CSS3 (Custom Glassmorphism), Bootstrap 5
-* **Mobil Teknoloji:** Progressive Web App (PWA) Mimarisinde Responsive Design
 
 ---
 
 ## 📱 Test Edilen Platformlar
 
-Uygulama, "Platform Bağımsız" yapısı sayesinde aşağıdaki ortamlarda test edilmiş ve başarıyla çalışmıştır:
-
-1.  **Fiziksel Cihazlar:**
-    * **Android:** Samsung Galaxy S Serisi (Google Chrome & Samsung Internet Tarayıcıları)
-    * **iOS:** iPhone 13 (Safari Tarayıcı)
-2.  **Emülatör ve Simülatörler:**
-    * Chrome DevTools Mobile Emulation (iPhone 12 Pro, Pixel 5 görünümleri)
-    * Responsive Design Mode
+web
 
 ---
 
@@ -53,4 +43,4 @@ Projeyi yerel ortamda çalıştırmak için:
 4.  Projeyi çalıştırın (Tarayıcıda mobil görünüm için F12 tuşuna basıp mobil modu açabilirsiniz).
 
 ---
-*Bu proje, Araştırma Yöntem ve Teknikleri Dersi final ödevi kapsamında hazırlanmıştır.*
+
