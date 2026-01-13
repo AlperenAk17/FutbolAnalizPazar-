@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Şifremi Unuttum";
+}
+
+<style>
+    footer {
+        display: none !important;
+    }
+
+    body {
+        background-color: #060b1e;
+        overflow-x: hidden;
+    }
+
+    .login-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(6, 11, 30, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=1920&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        color: white;
+        max-width: 450px;
+        width: 100%;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white !important;
+        border-radius: 10px;
+        padding: 12px;
+    }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #0d6efd;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+        }
+
+    /* MAVİ GRADIENT BUTON */
+    .btn-submit {
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+        border: none;
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(13, 110, 253, 0.6);
+            color: white;
+        }
+</style>
+
+<div class="login-bg"></div>
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100" style="margin-top: -30px;">
+    <div class="glass-card text-center">
+
+        <div class="mb-4">
+            <i class="bi bi-shield-lock-fill display-4 text-primary"></i>
+            <h2 class="fw-bold mt-3">Şifremi Unuttum</h2>
+            <p class="text-white-50 small">Sisteme kayıtlı mail adresinizi girin.</p>
+        </div>
+
+        @if (TempData["Hata"] != null)
+        {
+            <div class="alert alert-danger bg-danger bg-opacity-25 border-0 text-white py-2">
+                <i class="bi bi-exclamation-circle me-2"></i> @TempData["Hata"]
+            </div>
+        }
+
+        <form method="post">
+            <div class="mb-4 text-start">
+                <label class="small text-white-50 ms-1 mb-1">E-Mail Adresi</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-secondary text-primary">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input type="email" name="mail" class="form-control border-start-0 ps-0" placeholder="ornek@mail.com" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit w-100 mb-3">
+                <i class="bi bi-send-fill me-2"></i> KOD GÖNDER
+            </button>
+
+            <a href="/Account/Login" class="text-white-50 small text-decoration-none hover-link">
+                <i class="bi bi-arrow-left"></i> Geri Dön
+            </a>
+        </form>
+    </div>
+</div>

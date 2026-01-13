@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#060b1e">
+
+    <title>@(ViewData["Title"]?.ToString() == "Ana Sayfa" ? "FutbolAnaliz" : $"{ViewData["Title"]} - FutbolAnaliz")</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    <header class="d-none d-md-block">
+        <nav class="navbar navbar-expand-sm navbar-custom fixed-top">
+            <div class="container">
+                <div class="d-flex align-items-center w-100">
+
+                    <a href="/Home/Index" class="navbar-brand me-auto text-decoration-none" style="cursor: pointer;">
+                        <span style="font-size: 1.5rem; margin-right: 5px;">⚽</span>
+                        FUTBOL<span class="text-primary">ANALİZ</span>
+                    </a>
+
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="text-white border border-secondary px-3 py-1 rounded-pill small">
+                                <i class="bi bi-person-circle text-primary"></i> @User.Identity.Name
+                            </span>
+                            <a href="/Account/CikisYap" class="btn btn-outline-danger btn-sm rounded-pill px-3">Çıkış</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex gap-2">
+                            <a class="btn-nav-login" href="/Account/Login">Giriş</a>
+                            <a class="btn-nav-register" href="/Account/RegisterSecim">Kayıt Ol</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid p-0 content-wrapper">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="mobile-bottom-nav d-md-none">
+
+        <a href="/Home/Index" class="nav-item">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Ana Sayfa</span>
+        </a>
+
+        <a href="/Home/Kesfet" class="nav-item">
+            <i class="bi bi-compass-fill"></i>
+            <span>Keşfet</span>
+        </a>
+
+        <div class="nav-item-center">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                if (User.IsInRole("Analist"))
+                {
+                    <a href="/Profil/Dashboard" class="center-btn"><i class="bi bi-speedometer2"></i></a>
+                }
+                else
+                {
+                    <a href="/Talep/Olustur" class="center-btn"><i class="bi bi-plus-lg"></i></a>
+                }
+            }
+            else
+            {
+                <a href="/Account/RegisterSecim" class="center-btn">
+                    <i class="bi bi-person-plus-fill"></i>
+                </a>
+            }
+        </div>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a href="/Talep/Taleplerim" class="nav-item">
+                <i class="bi bi-list-check"></i>
+                <span>İşlerim</span>
+            </a>
+            <a href="/Account/CikisYap" class="nav-item text-danger">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Çıkış</span>
+            </a>
+        }
+        else
+        {
+            <a href="/Account/Login" class="nav-item">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Giriş</span>
+            </a>
+        }
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

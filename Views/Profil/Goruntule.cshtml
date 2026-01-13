@@ -1,0 +1,106 @@
+﻿@model FutbolAnalizPazari.Models.AnalizciProfil
+@{
+    ViewData["Title"] = Model.Ad + " " + Model.Soyad;
+    var bitenIsler = ViewBag.BitenIsler as List<FutbolAnalizPazari.Models.Basvurular>;
+}
+
+<div class="container mt-5" style="max-width: 900px;">
+
+    <div class="row align-items-center mb-5">
+
+        <div class="col-md-4 text-center">
+            <div class="ratio ratio-1x1 mx-auto" style="width: 150px;">
+                <img src="https://ui-avatars.com/api/?name=@Model.Ad+@Model.Soyad&background=random&size=256"
+                     class="rounded-circle border border-3 border-white shadow"
+                     alt="Profil Resmi"
+                     style="object-fit: cover;">
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <h2 class="fw-light m-0">@Model.Ad @Model.Soyad</h2>
+
+                <button class="btn btn-primary btn-sm fw-bold px-4">Takip Et</button>
+                <button class="btn btn-outline-secondary btn-sm fw-bold">Mesaj</button>
+
+                <i class="bi bi-gear text-muted" style="cursor: pointer;"></i>
+            </div>
+
+            <div class="d-flex gap-4 mb-4">
+                <div class="text-center">
+                    <span class="fw-bold d-block fs-5">@Model.YaptigiAnalizSay</span>
+                    <span class="text-muted small">Analiz</span>
+                </div>
+                <div class="text-center">
+                    <span class="fw-bold d-block fs-5">@Model.OnayAnalizSay</span>
+                    <span class="text-muted small">Onaylı</span>
+                </div>
+                <div class="text-center">
+                    <span class="fw-bold d-block fs-5 text-warning">
+                        @(Model.AnalizPuan != null ? Model.AnalizPuan.Value.ToString("0.0") : "0.0") ⭐
+                    </span>
+                    <span class="text-muted small">Puan</span>
+                </div>
+            </div>
+
+            <div>
+                <p class="mb-1 fw-bold">@Model.CalistigiKulup (Mevcut Kulüp)</p>
+                <p class="text-muted mb-0">
+                    @(string.IsNullOrEmpty(Model.Hakkinda) ? "Henüz bir biyografi eklenmemiş." : Model.Hakkinda)
+                </p>
+                <a href="#" class="text-decoration-none small">FutbolAnalizPazari.com/@Model.Ad@Model.Soyad</a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mb-4" />
+
+    <ul class="nav nav-tabs justify-content-center border-0 mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active border-0 text-dark fw-bold" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button">
+                <i class="bi bi-grid-3x3"></i> ONAYLANAN ANALİZLER
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="posts" role="tabpanel">
+
+            @if (bitenIsler == null || bitenIsler.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-camera display-4 text-muted"></i>
+                    <p class="mt-3 text-muted">Henüz onaylanmış bir analizi yok.</p>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    @foreach (var islem in bitenIsler)
+                    {
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="bi bi-file-earmark-pdf text-danger display-1"></i>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title text-truncate">Rapor #@islem.RaporID</h6>
+                                    <p class="card-text small text-muted">
+                                        @islem.Tarih.ToString("dd MMM yyyy")
+                                    </p>
+                                    <span class="badge bg-warning text-dark">
+                                        Puan: @(islem.Puan ?? 0)
+                                    </span>
+                                </div>
+                                <a href="/raporlar/@islem.DosyaYolu" target="_blank" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Takım Kaydı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Footer'ı gizle */
+    footer {
+        display: none !important;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* ARKA PLAN (DEVASA STADYUM) */
+    .register-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* YENİ GÖRSEL: Işıklandırılmış büyük stadyum */
+        background: linear-gradient(rgba(6, 40, 30, 0.85), rgba(0, 0, 0, 0.95)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+    }
+
+    /* BUZLU CAM KART */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 25px;
+        padding: 40px;
+        color: white;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    /* FORM ELEMANLARI */
+    .form-label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .form-control, .form-select {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        border-radius: 12px;
+        padding: 12px 15px;
+    }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: #198754 !important; /* Yeşil odak rengi */
+            box-shadow: 0 0 15px rgba(25, 135, 84, 0.4) !important;
+        }
+        /* Placeholder rengi */
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+    /* BUTON */
+    .btn-register {
+        background: linear-gradient(135deg, #198754, #20c997); /* Takım için Yeşil tonları */
+        border: none;
+        color: white;
+        padding: 15px;
+        border-radius: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+    }
+
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(25, 135, 84, 0.5);
+        }
+</style>
+
+<div class="register-bg"></div>
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100 py-5" style="margin-top: 40px;">
+    <div class="col-lg-6 col-md-8">
+        <div class="glass-card">
+
+            <div class="text-center mb-4">
+                <i class="bi bi-shield-shaded display-4 text-success"></i>
+                <h2 class="fw-bold mt-3">Takım Kaydı Oluştur</h2>
+                <p class="text-white-50">Kulübünüzü profesyonel analiz dünyasına taşıyın.</p>
+            </div>
+
+            <form method="post" action="/Account/TakimKayit">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label"><i class="bi bi-flag-fill me-2"></i>Kulüp Adı</label>
+                        <input type="text" name="KulupAd" class="form-control" placeholder="Örn: Turgutluspor" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Yetkili Adı</label>
+                        <input type="text" name="YetkiliAd" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Yetkili Soyadı</label>
+                        <input type="text" name="YetkiliSoyad" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Bulunduğu Lig</label>
+                        <select name="Lig" class="form-select" required>
+                            <option value="" selected disabled>Seçiniz...</option>
+                            <option value="Süper Lig">Süper Lig</option>
+                            <option value="1. Lig">1. Lig</option>
+                            <option value="2. Lig">2. Lig</option>
+                            <option value="3. Lig">3. Lig</option>
+                            <option value="BAL Ligi">BAL Ligi</option>
+                            <option value="Amatör">Amatör Ligler</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Şehir</label>
+                        <input type="text" name="Sehir" class="form-control" placeholder="Örn: Manisa" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label"><i class="bi bi-envelope-fill me-2"></i>Yetkili E-Mail</label>
+                        <input type="email" name="YetkiliMail" class="form-control" placeholder="mail@kulup.com" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label"><i class="bi bi-telephone-fill me-2"></i>Telefon No</label>
+                        <input type="tel" name="TelefonNo" class="form-control" placeholder="0555 555 55 55" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label"><i class="bi bi-lock-fill me-2"></i>Şifre Belirle</label>
+                        <input type="password" name="Sifre" class="form-control" placeholder="******" required>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-register w-100">
+                        KAYDI TAMAMLA <i class="bi bi-arrow-right-short ms-2"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4 text-white-50 small">
+                Zaten hesabınız var mı? <a href="/Account/Login" class="text-success fw-bold text-decoration-none">Giriş Yap</a>
+            </div>
+        </div>
+    </div>
+</div>

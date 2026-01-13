@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<style>
+    /* Footer'ı bu sayfada gizle ki resim kesilmesin */
+    footer {
+        display: none !important;
+    }
+
+    /* TAM EKRAN ARKA PLAN */
+    .hero-section {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Tüm ekran yüksekliği */
+        margin-top: -80px; /* Navbar'ın altına girmesi için yukarı çekiyoruz */
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(6, 11, 30, 0.9)), url('https://images.unsplash.com/photo-1579952363873-27f3bade8f55?q=80&w=1920&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+    /* İçerik Kutusu */
+    .hero-content {
+        max-width: 800px;
+        padding: 20px;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 40px;
+        font-weight: 300;
+    }
+
+    /* Butonlar */
+    .btn-hero {
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        margin: 10px;
+        display: inline-block;
+    }
+
+    .btn-primary-hero {
+        background: #0d6efd;
+        color: white;
+        box-shadow: 0 10px 25px rgba(13, 110, 253, 0.4);
+    }
+
+        .btn-primary-hero:hover {
+            background: #0b5ed7;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(13, 110, 253, 0.6);
+            color: white;
+        }
+
+    .btn-outline-hero {
+        border: 2px solid white;
+        color: white;
+        background: transparent;
+    }
+
+        .btn-outline-hero:hover {
+            background: white;
+            color: #060b1e;
+            transform: translateY(-3px);
+        }
+
+    /* MOBİL UYUM (DÜZELTİLDİ: @@media kullanıldı) */
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .hero-section {
+            margin-top: 0;
+            height: calc(100vh - 70px); /* Alt menü payı */
+        }
+    }
+</style>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            FUTBOL <span class="text-primary">ANALİZ</span> PAZARI
+        </h1>
+        <p class="hero-subtitle">
+            Takımlar performansını artırır, analistler yeteneğini gösterir.<br>
+            Profesyonel futbol dünyasının buluşma noktası.
+        </p>
+
+        <div class="d-flex justify-content-center flex-wrap">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a href="/Home/Kesfet" class="btn-hero btn-primary-hero">
+                    KEŞFETMEYE BAŞLA <i class="bi bi-arrow-right"></i>
+                </a>
+            }
+            else
+            {
+                <a href="/Account/RegisterSecim" class="btn-hero btn-primary-hero">
+                    HEMEN BAŞLA <i class="bi bi-arrow-right"></i>
+                </a>
+                <a href="/Account/Login" class="btn-hero btn-outline-hero">
+                    GİRİŞ YAP
+                </a>
+            }
+        </div>
+    </div>
+</div>

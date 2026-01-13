@@ -1,0 +1,205 @@
+﻿@{
+    ViewData["Title"] = "Kayıt Seçimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Footer gizle, sayfa tam ekran olsun */
+    footer {
+        display: none !important;
+    }
+
+    /* Ana Konteyner */
+    .split-container {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 80px); /* Masaüstü yüksekliği */
+        display: flex;
+        z-index: 10;
+        background-color: #060b1e;
+    }
+
+    /* Sol ve Sağ Taraflar */
+    .split-side {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid rgba(255,255,255,0.05); /* Çizgiyi incelttik */
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
+
+    /* Arka Plan Ayarları */
+    .side-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        transition: all 0.6s ease;
+    }
+
+    /* SOL TARAF (Takım) - Resim Yok, Hafif Yeşil Geçiş */
+    .bg-left {
+        background-image: none;
+        background: linear-gradient(135deg, #0b2e1e 0%, #060b1e 100%); /* Çok koyu yeşilden siyaha */
+    }
+
+    /* SAĞ TARAF (Analist) - RESİM KALDIRILDI, Hafif Mavi Geçiş */
+    .bg-right {
+        background-image: none; /* Resim iptal */
+        background: linear-gradient(135deg, #0a1f4d 0%, #060b1e 100%); /* Çok koyu maviden siyaha */
+    }
+
+    /* Hover Efekti (Sadece Masaüstü - Renk Parlaması) */
+    @@media (min-width: 993px) {
+        .split-side:hover {
+            width: 55%;
+        }
+
+        .split-container:hover .split-side:not(:hover) {
+            width: 45%;
+        }
+        /* Üzerine gelince arka plan biraz parlasın */
+        .split-side:hover .bg-left {
+            background: linear-gradient(135deg, #145535 0%, #060b1e 100%);
+        }
+
+        .split-side:hover .bg-right {
+            background: linear-gradient(135deg, #0d2b6b 0%, #060b1e 100%);
+        }
+    }
+
+    /* İçerik Kartı */
+    .content-card {
+        position: relative;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.4); /* Daha şeffaf */
+        backdrop-filter: blur(10px); /* Buzlu cam */
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+        max-width: 450px;
+        width: 85%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .card-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .card-title {
+        font-weight: 800;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #ccc;
+        margin-bottom: 25px;
+    }
+
+    /* Butonlar */
+    .btn-custom {
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: white;
+        display: inline-block;
+        transition: 0.3s;
+        border: none;
+    }
+
+    /* Renkler */
+    .left-theme .card-icon {
+        color: #198754;
+    }
+
+    .left-theme .btn-custom {
+        background-color: #198754;
+        box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+    }
+
+    .right-theme .card-icon {
+        color: #0d6efd;
+    }
+
+    .right-theme .btn-custom {
+        background-color: #0d6efd;
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+    }
+
+    .btn-custom:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.1);
+    }
+
+    /* --- MOBİL ÖZEL AYARLAR --- */
+    @@media (max-width: 992px) {
+        .split-container {
+            flex-direction: column;
+            top: 0;
+            height: calc(100vh - 70px);
+        }
+
+        .split-side {
+            width: 100% !important;
+            height: 50% !important;
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .content-card {
+            padding: 25px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            display: none;
+        }
+    }
+</style>
+
+<div class="split-container">
+    <div class="split-side left-theme">
+        <div class="side-bg bg-left"></div>
+        <div class="content-card">
+            <i class="bi bi-clipboard-check card-icon"></i>
+            <h2 class="card-title">TAKIM YÖNETİMİ</h2>
+            <p class="card-text">Liderliğini profesyonel analizle sahaya yansıt.</p>
+            <a href="/Account/TakimKayit" class="btn-custom">TAKIM HESABI AÇ</a>
+        </div>
+    </div>
+    <div class="split-side right-theme">
+        <div class="side-bg bg-right"></div>
+        <div class="content-card">
+            <i class="bi bi-graph-up-arrow card-icon"></i>
+            <h2 class="card-title">FUTBOL ANALİSTİ</h2>
+            <p class="card-text">Yeteneklerini sergile, analizlerini kazanca dönüştür.</p>
+            <a href="/Account/AnalizciKayit" class="btn-custom">ANALİST OL</a>
+        </div>
+    </div>
+</div>

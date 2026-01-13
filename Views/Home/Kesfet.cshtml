@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Keşfet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #060b1e;
+        color: white;
+    }
+
+    /* Arama Kutusu */
+    .search-container {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .search-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 50px;
+        padding: 15px 25px;
+        padding-right: 50px;
+        width: 100%;
+        transition: all 0.3s;
+    }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #0d6efd;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+            outline: none;
+        }
+
+    .search-btn {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.2rem;
+    }
+
+    /* Kart Tasarımı */
+    .discovery-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .discovery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(13, 110, 253, 0.3);
+        }
+
+    .card-img-top {
+        height: 180px;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
+
+    .discovery-card:hover .card-img-top {
+        opacity: 1;
+    }
+
+    .analyst-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #060b1e;
+        margin-top: -20px;
+        margin-left: 15px;
+        background-color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold mb-3">Futbol Dünyasını <span class="text-primary">Keşfet</span></h1>
+        <p class="text-white-50 mb-4">En iyi analistleri, detaylı raporları ve yetenekli oyuncuları bul.</p>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Takım, Oyuncu veya Analist ara...">
+            <button class="search-btn"><i class="bi bi-search"></i></button>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mb-5 flex-wrap">
+        <button class="btn btn-outline-light rounded-pill px-4 active">Tümü</button>
+        <button class="btn btn-outline-light rounded-pill px-4">Süper Lig</button>
+        <button class="btn btn-outline-light rounded-pill px-4">Alt Ligler</button>
+        <button class="btn btn-outline-light rounded-pill px-4">Scouting</button>
+        <button class="btn btn-outline-light rounded-pill px-4">Maç Analizi</button>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="discovery-card h-100 d-flex flex-column">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Analiz">
+                <div class="analyst-avatar">A</div>
+                <div class="p-4 flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-primary bg-opacity-25 text-primary border border-primary border-opacity-25">Maç Analizi</span>
+                        <small class="text-white-50"><i class="bi bi-star-fill text-warning"></i> 4.9</small>
+                    </div>
+                    <h5 class="fw-bold mb-2">Galatasaray - Fenerbahçe Derbi Analizi</h5>
+                    <p class="text-white-50 small mb-3">İki takımın taktiksel dizilişleri ve kilit oyuncu performansları üzerine detaylı rapor.</p>
+                </div>
+                <div class="p-3 border-top border-secondary border-opacity-25 text-end">
+                    <button class="btn btn-sm btn-light fw-bold rounded-pill px-3">İncele</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="discovery-card h-100 d-flex flex-column">
+                <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Analiz">
+                <div class="analyst-avatar bg-warning text-dark">M</div>
+                <div class="p-4 flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25">Scouting</span>
+                        <small class="text-white-50"><i class="bi bi-star-fill text-warning"></i> 4.7</small>
+                    </div>
+                    <h5 class="fw-bold mb-2">U19 Ligi Geleceğin Yıldızları</h5>
+                    <p class="text-white-50 small mb-3">Altınordu ve Bursaspor altyapılarında dikkat çeken 5 genç yetenek.</p>
+                </div>
+                <div class="p-3 border-top border-secondary border-opacity-25 text-end">
+                    <button class="btn btn-sm btn-light fw-bold rounded-pill px-3">İncele</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="discovery-card h-100 d-flex flex-column">
+                <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Analiz">
+                <div class="analyst-avatar bg-danger text-white">S</div>
+                <div class="p-4 flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-25">Veri Analizi</span>
+                        <small class="text-white-50"><i class="bi bi-star-fill text-warning"></i> 5.0</small>
+                    </div>
+                    <h5 class="fw-bold mb-2">Süper Lig xG Raporu</h5>
+                    <p class="text-white-50 small mb-3">Hangi takımlar beklenen gol (xG) oranının üzerinde performans sergiliyor?</p>
+                </div>
+                <div class="p-3 border-top border-secondary border-opacity-25 text-end">
+                    <button class="btn btn-sm btn-light fw-bold rounded-pill px-3">İncele</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
